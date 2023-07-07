@@ -50,7 +50,8 @@
         <h5>All Person List</h5>
       </div>
       <div class="col-6 text-end">
-        <button v-on:click="excel_export()">Export</button>
+        <!-- <button v-on:click="excel_export()">Export</button> -->
+        <router-link to="/import">Add</router-link>
         <button v-on:click="excel_import()">Import</button>
       </div>
     </div>

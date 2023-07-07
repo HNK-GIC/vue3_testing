@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ListView from '../views/ListView.vue'
-
+import ExcelImportView from '../views/ExcelImportView.vue'
 const routes = [
   {
     path: '/',
@@ -12,6 +12,12 @@ const routes = [
     path: '/home',
     name: 'home',
     component: HomeView
+  },
+
+  {
+    path: '/import',
+    name: 'import',
+    component: ExcelImportView
   },
   {
     path: '/about',
