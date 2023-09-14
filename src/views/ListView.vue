@@ -1,11 +1,16 @@
 <template>
   <mainlayout>
+    <!-- Register Form -->
     <div class="row justify-content-center">
       <div class="card col-6 m-3">
         <div class="row">
           <label class="text-start col-12">Register Number :</label>
           <div class="col-12">
-            <input type="text" class="form-control" v-model="add_person.reg_no" />
+            <input
+              type="text"
+              class="form-control"
+              v-model="add_person.reg_no"
+            />
           </div>
         </div>
         <div class="row">
@@ -23,13 +28,21 @@
         <div class="row">
           <label class="text-start col-12">Address :</label>
           <div class="col-12">
-            <input type="text" class="form-control" v-model="add_person.address" />
+            <input
+              type="text"
+              class="form-control"
+              v-model="add_person.address"
+            />
           </div>
         </div>
         <div class="row">
           <label class="text-start col-12">Phone :</label>
           <div class="col-12">
-            <input type="text" class="form-control" v-model="add_person.phone" />
+            <input
+              type="text"
+              class="form-control"
+              v-model="add_person.phone"
+            />
           </div>
         </div>
         <div class="row mt-3 mb-3">
@@ -45,6 +58,7 @@
         </div>
       </div>
     </div>
+    <hr />
     <div class="row mt-2">
       <div class="col-6 text-start">
         <h5>All Person List</h5>
@@ -55,6 +69,7 @@
       </div>
     </div>
     <hr />
+    <!-- List -->
     <div class="row table-responsive mt-3">
       <div class="col-12">
         <table class="table table-sm table-striped">
@@ -83,7 +98,10 @@
                 >
                   <i class="fa-solid fa-trash-can"></i>
                 </button>
-                <button v-on:click="edit_data(i.id)" class="btn btn-sm btn-warning">
+                <button
+                  v-on:click="edit_data(i.id)"
+                  class="btn btn-sm btn-warning"
+                >
                   <i class="fa-solid fa-pen-to-square"></i>
                 </button>
               </td>
@@ -95,10 +113,12 @@
   </mainlayout>
 </template>
 <script>
-import mainlayout from "../components/MainLayout.vue";
+import Configuration from '../Service/configuration.js';
+import DataService from '../Service/data-service.js';
+import mainlayout from "@/components/MainLayout.vue";
 export default {
   components: {
-    mainlayout,
+    mainlayout
   },
   data() {
     return {
@@ -107,19 +127,21 @@ export default {
     };
   },
   async mounted() {
-    let url = "http://127.0.0.1:8000/api/person";
-    await this.axios.get(url).then((response) => (this.all_person = response.data));
+    var dataservice = new DataService();
+    var config = new Configuration();
+    var serverResponse = await dataservice.retrieveWithGet(config.SERVICE_NAME_PERSON);
+    this.all_person = serverResponse;
+
   },
   methods: {
     async add_data() {
-      let url = "http://127.0.0.1:8000/api/person";
-      await this.axios.post(url, this.add_person).then((response) => {
-        this.all_person = response.data;
-        this.add_person = "";
-      });
+      var dataservice = new DataService();
+      var config = new Configuration();
+
+      var serverResponse = await dataservice.createWithPost(config.SERVICE_NAME_PERSON,this.add_person);
+      this.all_person = serverResponse;
+      this.add_person = "";
     }
-    // excel_export: function () {},
-    // excel_import: function () {},
-  }
+  },
 };
 </script>

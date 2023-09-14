@@ -3,7 +3,12 @@
     <!-- <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> | -->
     <router-link to="/">List</router-link> |
-    <router-link to="/addview">Add</router-link>
+    <router-link to="/dt">Datatable</router-link> |
+    <router-link to="/photo">Photo</router-link> |
+    <router-link to="/xlsx">XLSX Export</router-link> |
+    <router-link to="/export">CSV Export</router-link> |
+    <router-link to="/import">CSV Import</router-link> |
+    <router-link to="/pdf">Download PDF</router-link>
   </nav>
   <router-view/>
 </template>
